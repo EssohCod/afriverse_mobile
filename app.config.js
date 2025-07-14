@@ -60,9 +60,12 @@ export default {
     },
     android: {
       package: "com.afriversefoods.mobileapp",
-      versionCode: 12,
+      // versionCode: 12,
     },
     ios: {
+      "infoPlist": {
+      "ITSAppUsesNonExemptEncryption": false
+    },
       bundleIdentifier: "com.afriversefoods.mobileapp",
       buildNumber: "1.0.0",
     },
