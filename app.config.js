@@ -49,13 +49,13 @@ dotenv.config();
 
 export default {
   expo: {
-    name: "afriverse",
-    slug: "afriverse",
+    name: "Afriverse Foods",
+    slug: "afriverse-foods",
     extra: {
       SHOPIFY_DOMAIN: process.env.SHOPIFY_DOMAIN,
       SHOPIFY_STOREFRONT_ACCESS_TOKEN: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN,
       eas: {
-        projectId: "ecf93f85-b692-4a7b-a199-a9aab7e65a10",
+        projectId: "3cf5bcd9-7836-4c5c-92aa-39f4478bac87",
       },
     },
     android: {
