@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Header from '../components/Header';
 import { useCart } from '../context/CartContext.native';
 import { AuthContext } from '../context/AuthContext.native';
+import SocialMedia from '../components/SocialMedia';
+import { useFavourites } from '../context/FavouriteContext.native';
 
 const sizeMultipliers = {
   '9kg/20lb': 1,
@@ -25,10 +27,10 @@ export default function ProductDetailsScreen() {
   const route = useRoute();
   const navigation = useNavigation();
   const { product } = route.params;
+  const { addFavourite, removeFavourite, isFavourite } = useFavourites();
 
   const [selectedSize, setSelectedSize] = useState('9kg/20lb');
   const [quantity, setQuantity] = useState(1);
-  const [isFav, setIsFav] = useState(false);
 
   const { addToCart } = useCart();
   const { user } = useContext(AuthContext);
@@ -55,23 +57,33 @@ export default function ProductDetailsScreen() {
     }
   };
 
+  // ✅ Use helper, don’t keep separate state
+  const fav = isFavourite(product.variantId, selectedSize);
+
   const toggleFav = () => {
-    setIsFav(prev => !prev);
-    // Optionally save to local state or API
+    if (fav) {
+      removeFavourite(product.variantId, selectedSize);
+    } else {
+      addFavourite({
+        ...product,
+        variantId: product.variantId,
+        size: selectedSize,
+      });
+    }
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Header title="Product Details" />
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <Header style={{ marginBottom: 50 }} title="Product Details" />
 
       <ScrollView style={styles.container}>
         <View style={styles.imageWrapper}>
           <Image source={{ uri: product.image }} style={styles.productImage} />
           <TouchableOpacity style={styles.favIcon} onPress={toggleFav}>
             <Ionicons
-              name={isFav ? 'heart' : 'heart-outline'}
+              name={fav ? 'heart' : 'heart-outline'}
               size={24}
-              color={isFav ? 'red' : '#333'}
+              color={fav ? 'red' : '#333'}
             />
           </TouchableOpacity>
         </View>
@@ -129,6 +141,7 @@ export default function ProductDetailsScreen() {
         <Text style={styles.description}>
           {product.description || 'No description available.'}
         </Text>
+        <SocialMedia />
       </ScrollView>
     </View>
   );

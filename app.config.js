@@ -69,5 +69,6 @@ export default {
       bundleIdentifier: "com.afriversefoods.mobileapp",
       buildNumber: "1.0.0",
     },
+    "plugins": ["expo-font"],
   },
 };

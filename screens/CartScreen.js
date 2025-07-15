@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CartHeader from '../components/CartHeader';
-import { useCart } from '../context/CartContext.native'; // ✅ use cart context
+import { useCart } from '../context/CartContext.native';
+import AppText from '../components/AppText'; // ✅ Import AppText
 
 export default function CartScreen() {
   const navigation = useNavigation();
@@ -34,9 +35,9 @@ export default function CartScreen() {
     <View style={styles.card}>
       <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.middle}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
-        <Text style={styles.price}>${item.price.toFixed(2)}</Text>
+        <AppText style={styles.name}>{item.name}</AppText>
+        <AppText style={styles.quantity}>Quantity: {item.quantity}</AppText>
+        <AppText style={styles.price}>${item.price.toFixed(2)}</AppText>
       </View>
       <View style={styles.right}>
         <TouchableOpacity onPress={() => handleDelete(item.lineId)}>
@@ -46,7 +47,7 @@ export default function CartScreen() {
           <TouchableOpacity onPress={() => handleQuantityChange(item.lineId, -1)}>
             <Ionicons name="remove-circle-outline" size={22} color="#47241C" />
           </TouchableOpacity>
-          <Text style={styles.qty}>{item.quantity}</Text>
+          <AppText style={styles.qty}>{item.quantity}</AppText>
           <TouchableOpacity onPress={() => handleQuantityChange(item.lineId, 1)}>
             <Ionicons name="add-circle-outline" size={22} color="#47241C" />
           </TouchableOpacity>
@@ -67,21 +68,22 @@ export default function CartScreen() {
         contentContainerStyle={{ padding: 16 }}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>Your cart is empty.</Text>
+            <AppText style={styles.emptyText}>Your cart is empty.</AppText>
           </View>
         }
       />
       {cartItems.length > 0 && (
         <View style={styles.cartFooter}>
-          <Text style={styles.totalText}>Total: ${totalPrice.toFixed(2)}</Text>
+          <AppText style={styles.totalText}>Total: ${totalPrice.toFixed(2)}</AppText>
           <TouchableOpacity style={styles.checkoutButton} onPress={handleCheckout}>
-            <Text style={styles.checkoutButtonText}>Checkout</Text>
+            <AppText style={styles.checkoutButtonText}>Checkout</AppText>
           </TouchableOpacity>
         </View>
       )}
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

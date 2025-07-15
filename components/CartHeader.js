@@ -1,53 +1,56 @@
-import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Header({ title, cartQuantities = {}, onCartPress = () => {} }) {
+export default function Header({ title }) {
   const navigation = useNavigation();
 
-  const totalItems = Object.values(cartQuantities).reduce((sum, qty) => sum + qty, 0);
-
   return (
-    <View style={styles.header}>
+    <View style={styles.headerContainer}>
       {/* Back Button */}
-      <Pressable
-        onPress={() => navigation.canGoBack() && navigation.goBack()}
-        style={({ pressed }) => [
-          styles.backButton,
-          pressed && { opacity: 0.5 },
-        ]}
-        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-      >
-        <Ionicons name="arrow-back" size={26} color="#47241C" />
-      </Pressable>
+      {navigation.canGoBack() && (
+        <Pressable
+          onPress={() => navigation.goBack()}
+          style={({ pressed }) => [
+            styles.backButton,
+            pressed && { opacity: 0.6 },
+          ]}
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        >
+          <Ionicons name="arrow-back" size={24} color="#47241C" />
+        </Pressable>
+      )}
 
-      {/* Page Title */}
-      <Text style={styles.title}>{title}</Text>
+      {/* Title */}
+      <View style={styles.titleWrapper}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 100,
-    paddingTop: 40,
-    paddingHorizontal: 30,
-    backgroundColor: '#fff',
+  headerContainer: {
     height: 80,
+    paddingTop: 40,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
   },
   backButton: {
+    position: 'absolute',
+    left: 20,
+    top: 40,
     backgroundColor: '#f1f1f1',
     borderRadius: 30,
     padding: 6,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  iconCircle: {
-    backgroundColor: '#f1f1f1',
-    borderRadius: 20,
-    padding: 6,
+  titleWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
     fontSize: 18,

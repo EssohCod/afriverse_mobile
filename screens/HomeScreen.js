@@ -23,6 +23,8 @@ import Animated, {
 import { useProducts } from '../context/ProductContext.native';
 import { useCart } from '../context/CartContext.native';
 import Constants from 'expo-constants';
+import SocialMedia from '../components/SocialMedia';
+import PageContact from '../components/PageContact.native';
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -76,6 +78,7 @@ export default function HomeScreen() {
   ];
 
   return (
+    <View style={{ flex: 1 }}>
     <ScrollView
       contentContainerStyle={styles.container}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
@@ -220,7 +223,10 @@ export default function HomeScreen() {
           );
         })}
       </View>
+      <SocialMedia />
     </ScrollView>
+    <PageContact />
+    </View>
   );
 }
 
