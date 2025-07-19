@@ -7,7 +7,7 @@ const PageContact = () => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('ContactScreen');
+    navigation.navigate('HelpScreen');
   };
 
   return (
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-    elevation: 5, // Android shadow
+    elevation: 5,
   },
   icon: {
     width: 20,

@@ -24,6 +24,9 @@ export async function shopifyQuery(query, variables = {}) {
     throw new Error("Shopify query failed");
   }
 
+  console.log("✅ SHOPIFY_DOMAIN:", SHOPIFY_DOMAIN);
+  console.log("✅ SHOPIFY_STOREFRONT_ACCESS_TOKEN:", SHOPIFY_STOREFRONT_ACCESS_TOKEN);
+
   return result.data;
 }
 

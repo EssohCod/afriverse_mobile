@@ -44,7 +44,6 @@ import AddressListScreen from './screens/AddressListScreen';
 import DeleteAccountScreen from './screens/DeleteAccountScreen';
 import AccountDeletedScreen from './screens/AccountDeletedScreen';
 import AccountRestoredScreen from './screens/AccountRestoredScreen';
-import ContactScreen from './screens/ContactScreen';
 
 // Prevent auto-hiding the splash screen
 SplashScreen.preventAutoHideAsync();
@@ -145,7 +144,6 @@ export default function App() {
                 <Stack.Screen name="DeleteAccountScreen" component={DeleteAccountScreen} />
                 <Stack.Screen name="AccountDeletedScreen" component={AccountDeletedScreen} />
                 <Stack.Screen name="AccountRestoredScreen" component={AccountRestoredScreen} />
-                <Stack.Screen name="ContactScreen" component={ContactScreen} />
               </Stack.Navigator>
             </NavigationContainer>
           </CartProvider>
